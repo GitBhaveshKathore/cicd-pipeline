@@ -90,8 +90,6 @@ pipeline {
             steps {
                 sh '''
                 kubectl apply -f kubernetes/deployment.yaml
-                kubectl apply -f kubernetes/service.yaml
-
                 kubectl set image deployment/flask-cicd-app \
                 flask-cicd-app=${DOCKER_IMAGE}:${BUILD_NUMBER}
 
