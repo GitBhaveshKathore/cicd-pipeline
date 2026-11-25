@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         KUBECONFIG = '/var/lib/jenkins/.kube/config'
-        DOCKER_IMAGE = 'kubebhavesh/flask-cicd-app'
+        DOCKER_IMAGE = 'kubebhavesh/cicd-app'
         VENV = "${WORKSPACE}/venv"
     }
 
