@@ -9,6 +9,7 @@ pipeline {
 	
 	triggers {
         // Triggers the pipeline when a webhook is received from GitHub
+        // triggers
         githubPush() 
     }
 
