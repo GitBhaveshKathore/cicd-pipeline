@@ -16,7 +16,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/GitBhaveshKathore/flask-cicd-project.git'
+                    url: 'https://github.com/GitBhaveshKathore/cicd-pipeline.git'
             }
         }
 
