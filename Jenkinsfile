@@ -92,8 +92,6 @@ pipeline {
                 kubectl apply -f kubernetes/deployment.yaml
                 kubectl set image deployment/flask-cicd-app \
                 flask-cicd-app=${DOCKER_IMAGE}:${BUILD_NUMBER}
-
-                kubectl rollout status deployment/flask-cicd-app --timeout=180s
                 '''
             }
         }
