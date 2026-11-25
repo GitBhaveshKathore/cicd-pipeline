@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     environment {
-        MINIKUBE_HOME = '/home/ec2-user/.minikube'
-        KUBECONFIG = '/home/ec2-user/.kube/config'
+        KUBECONFIG = '/var/lib/jenkins/.kube/config'
         DOCKER_IMAGE = 'kubebhavesh/flask-cicd-app'
         VENV = "${WORKSPACE}/venv"
     }
@@ -91,10 +90,10 @@ pipeline {
             steps {
                 sh '''
                 kubectl apply -f kubernetes/deployment.yaml
+                kubectl apply -f kubernetes/service.yaml
 
                 kubectl set image deployment/flask-cicd-app \
-                flask-cicd-app=''' + '${DOCKER_IMAGE}:${BUILD_NUMBER}' + ''' \
-                --record
+                flask-cicd-app=${DOCKER_IMAGE}:${BUILD_NUMBER}
 
                 kubectl rollout status deployment/flask-cicd-app --timeout=180s
                 '''
@@ -105,14 +104,11 @@ pipeline {
             steps {
                 sh '''
                 kubectl get deployments
-
-                kubectl get pods -l app=flask-cicd-app
-
+                kubectl get pods
                 kubectl get svc
                 '''
             }
         }
-
         stage('Expose Application') {
             steps {
                 sh '''
